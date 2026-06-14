@@ -21,8 +21,8 @@ export default defineConfig({
           req.on('data', (chunk: Buffer) => chunks.push(chunk))
           req.on('end', () => {
             try {
-              const { n, pairs } = JSON.parse(Buffer.concat(chunks).toString()) as { n: number; pairs: unknown }
-              const filepath = `public/data/inputs/input_n${n}.json`
+              const { n, reps, pairs } = JSON.parse(Buffer.concat(chunks).toString()) as { n: number; reps: number; pairs: unknown }
+              const filepath = `public/data/inputs/input_n${n}_r${reps}.json`
               if (!existsSync(filepath)) {
                 mkdirSync('public/data/inputs', { recursive: true })
                 writeFileSync(filepath, JSON.stringify({ n, pairs }, null, 2))

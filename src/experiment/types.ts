@@ -10,6 +10,8 @@ export interface SizeResult {
   stdTimeNaive: number
   stdTimeDC: number
   allCorrect: boolean
+  sampleMedianNaive: number
+  sampleMedianDC: number
 }
 
 export interface WorkerCommand {

@@ -53,23 +53,32 @@ function startExperiment(nMin: number, nMax: number, reps: number) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-50">
-    <header class="bg-white border-b border-slate-200 shadow-sm">
-      <div class="max-w-6xl mx-auto px-6 py-5">
-        <h1 class="text-2xl font-bold text-slate-800">Mediana de Dois Bancos de Dados</h1>
-        <p class="text-sm text-slate-500 mt-1">
-          Comparação experimental: Juntar + Ordenar <span class="font-mono">O(n log n)</span>
-          vs Divisão e Conquista <span class="font-mono">O(log n)</span>
+  <div class="min-h-screen" style="background: #F5F5F7;">
+    <header
+      class="sticky top-0 z-20 bg-white/90"
+      style="border-bottom: 1px solid rgba(0,0,0,0.08); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);"
+    >
+      <div class="max-w-5xl mx-auto px-6 py-4">
+        <h1 class="text-xl font-semibold" style="color: #1D1D1F; letter-spacing: -0.02em;">
+          Mediana de Dois Bancos de Dados
+        </h1>
+        <p class="text-sm mt-0.5" style="color: #6E6E73;">
+          Comparação experimental:
+          <span class="font-medium" style="color: #FF3B30;">Juntar + Ordenar O(n log n)</span>
+          vs
+          <span class="font-medium" style="color: #0071E3;">Divisão e Conquista O(log n)</span>
+          · Experimento 6.10
         </p>
       </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-8 space-y-6">
+    <main class="max-w-5xl mx-auto px-6 py-8 space-y-5">
       <ExperimentControls :running="running" @start="startExperiment" />
 
       <div
         v-if="errorMsg"
-        class="bg-red-50 border border-red-200 rounded-2xl px-6 py-4 text-sm text-red-700"
+        class="rounded-2xl px-6 py-4 text-sm"
+        style="background: rgba(255,59,48,0.06); border: 1px solid rgba(255,59,48,0.2); color: #FF3B30;"
       >
         <strong>Erro:</strong> {{ errorMsg }}
       </div>
@@ -85,8 +94,8 @@ function startExperiment(nMin: number, nMax: number, reps: number) {
       <ExportPanel :results="results" :reps="lastReps" />
     </main>
 
-    <footer class="border-t border-slate-200 mt-12">
-      <div class="max-w-6xl mx-auto px-6 py-4 text-xs text-slate-400">
+    <footer style="border-top: 1px solid rgba(0,0,0,0.08); margin-top: 48px;">
+      <div class="max-w-5xl mx-auto px-6 py-4 text-xs" style="color: #6E6E73;">
         Divisão e Conquista — Experimento 6.10 · Análise de Algoritmos
       </div>
     </footer>

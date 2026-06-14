@@ -17,11 +17,11 @@ console.log(`Destino: ${OUT_DIR}/\n`)
 for (let i = 0; i < sizes.length; i++) {
   const n = sizes[i]
   const pairs = generateInputBatch(n, REPS)
-  const filename = `${OUT_DIR}/input_n${n}.json`
-  writeFileSync(filename, JSON.stringify({ n, pairs }, null, 2))
+  const filename = `${OUT_DIR}/input_n${n}_r${REPS}.json`
+  writeFileSync(filename, JSON.stringify({ n, reps: REPS, pairs }, null, 2))
 
   const pct = Math.round(((i + 1) / sizes.length) * 100)
-  process.stdout.write(`\r[${pct}%] Gerado: input_n${n}.json`)
+  process.stdout.write(`\r[${pct}%] Gerado: input_n${n}_r${REPS}.json`)
 }
 
 console.log('\n\nConcluído! Arquivos prontos para uso no experimento.')
