@@ -12,11 +12,9 @@ type Tab = 'live' | 'saved'
 
 const activeTab = ref<Tab>('live')
 
-// Resultados salvos em disco (public/data/results.json)
 const savedResults = ref<SizeResult[]>([])
 const savedReps = ref(10)
 
-// Resultados da execução ao vivo
 const liveResults = ref<SizeResult[]>([])
 const liveReps = ref(10)
 
@@ -30,7 +28,7 @@ let worker: Worker | null = null
 
 onMounted(async () => {
   try {
-    const res = await fetch('/data/results.json')
+    const res = await fetch(`${import.meta.env.BASE_URL}data/results.json`)
     if (res.ok) {
       const data = await res.json() as { reps: number; results: SizeResult[] }
       savedResults.value = data.results

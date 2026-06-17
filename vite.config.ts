@@ -5,6 +5,7 @@ import { mkdirSync, writeFileSync, existsSync } from 'fs'
 import type { IncomingMessage, ServerResponse } from 'http'
 
 export default defineConfig({
+  base: process.env['VITE_BASE'] ?? '/',
   plugins: [
     vue(),
     tailwindcss(),
