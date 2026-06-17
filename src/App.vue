@@ -23,6 +23,7 @@ const progress = ref(0)
 const currentN = ref(0)
 const errorMsg = ref('')
 const saveStatus = ref<'idle' | 'saving' | 'saved' | 'error'>('idle')
+const isDev = import.meta.env.DEV
 
 let worker: Worker | null = null
 
@@ -165,7 +166,7 @@ function startExperiment(nMin: number, nMax: number, reps: number) {
         <ExportPanel :results="liveResults" :reps="liveReps" />
 
         <div
-          v-if="liveResults.length > 0 && !running"
+          v-if="liveResults.length > 0 && !running && isDev"
           class="rounded-2xl px-6 py-4 flex items-center justify-between gap-4"
           style="background: white; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 1px 4px rgba(0,0,0,0.04);"
         >
@@ -173,7 +174,7 @@ function startExperiment(nMin: number, nMax: number, reps: number) {
             <p class="text-sm font-medium" style="color: #1D1D1F;">Salvar resultados para entrega</p>
             <p class="text-xs mt-0.5" style="color: #6E6E73;">
               Gera <code style="background: rgba(0,0,0,0.05); padding: 1px 4px; border-radius: 4px;">public/data/results.json</code>
-              — commite o arquivo e o professor verá os resultados ao abrir o app.
+              — commite o arquivo e verá os resultados ao abrir o app.
             </p>
           </div>
           <button
