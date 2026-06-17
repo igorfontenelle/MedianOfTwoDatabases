@@ -35,6 +35,28 @@ export default defineConfig({
             }
           })
         })
+
+        server.middlewares.use('/api/save-results', (req: IncomingMessage, res: ServerResponse) => {
+          if (req.method !== 'POST') {
+            res.statusCode = 405
+            res.end()
+            return
+          }
+          const chunks: Buffer[] = []
+          req.on('data', (chunk: Buffer) => chunks.push(chunk))
+          req.on('end', () => {
+            try {
+              const body = JSON.parse(Buffer.concat(chunks).toString()) as unknown
+              mkdirSync('public/data', { recursive: true })
+              writeFileSync('public/data/results.json', JSON.stringify(body))
+              res.statusCode = 200
+              res.end('ok')
+            } catch {
+              res.statusCode = 500
+              res.end('error')
+            }
+          })
+        })
       },
     },
   ],
